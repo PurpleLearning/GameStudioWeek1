@@ -11,10 +11,11 @@ public class PlayerControls : MonoBehaviour
     public float movementSpeed = 5f;
     private int maxRescueSoldiers = 3;
     private int currentRescueSoldiers = 0;
+    private int totalrescueSoldiers = 0;
 
 
     public TextMeshProUGUI soldierCountText;
-    
+    public TextMeshProUGUI rescuedSoliders;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -76,10 +77,16 @@ public class PlayerControls : MonoBehaviour
         {
             if (currentRescueSoldiers > 0)
             {
+                totalrescueSoldiers = currentRescueSoldiers + totalrescueSoldiers; 
                 currentRescueSoldiers = 0;
-                soldierCountText.text = "Soldiers in Helicopter: " + currentRescueSoldiers + "/" + maxRescueSoldiers;
                 
-                Debug.Log("There is " + currentRescueSoldiers);
+                
+                soldierCountText.text = "Soldiers in Helicopter: " + currentRescueSoldiers + "/" + maxRescueSoldiers;
+                rescuedSoliders.text = "Rescued Soldiers: " + totalrescueSoldiers;
+                
+                
+                
+                //Debug.Log("There is " + currentRescueSoldiers);
             }
         }
 
