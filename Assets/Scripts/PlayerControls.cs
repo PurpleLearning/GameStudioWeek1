@@ -20,6 +20,7 @@ public class PlayerControls : MonoBehaviour
     public TextMeshProUGUI soldierCountText;
     public TextMeshProUGUI rescuedSoliders;
     public TextMeshProUGUI winText;
+    public TextMeshProUGUI maxText;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -78,7 +79,14 @@ public class PlayerControls : MonoBehaviour
             }
             else
             {
-                Debug.Log("Maximum resuce");
+                
+                maxText.text = "MAX SOLIDER CAPACITY!!!";
+                maxText.color = Color.red;
+                maxText.fontSize = 36;
+ 
+                
+                
+                //Debug.Log("Maximum resuce");
             }
         }
         
@@ -92,6 +100,7 @@ public class PlayerControls : MonoBehaviour
                 
                 soldierCountText.text = "Soldiers in Helicopter: " + currentRescueSoldiers + "/" + maxRescueSoldiers;
                 rescuedSoliders.text = "Rescued Soldiers: " + totalrescueSoldiers;
+                maxText.gameObject.SetActive(false);
                 
                 //Debug.Log("There is " + currentRescueSoldiers);
             }
@@ -127,4 +136,6 @@ public class PlayerControls : MonoBehaviour
 
  
 }
+
+
 
