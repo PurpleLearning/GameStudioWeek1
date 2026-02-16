@@ -13,9 +13,12 @@ public class PlayerControls : MonoBehaviour
     private int currentRescueSoldiers = 0;
     private int totalrescueSoldiers = 0;
 
-
+    public int requiredRescueSoldiersToWin = 8;
+    
+    
     public TextMeshProUGUI soldierCountText;
     public TextMeshProUGUI rescuedSoliders;
+    public TextMeshProUGUI winText;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -84,10 +87,18 @@ public class PlayerControls : MonoBehaviour
                 soldierCountText.text = "Soldiers in Helicopter: " + currentRescueSoldiers + "/" + maxRescueSoldiers;
                 rescuedSoliders.text = "Rescued Soldiers: " + totalrescueSoldiers;
                 
-                
-                
                 //Debug.Log("There is " + currentRescueSoldiers);
             }
+
+            if (totalrescueSoldiers == requiredRescueSoldiersToWin)
+            {
+                movementSpeed = 0;
+                winText.text = "You Win";
+                winText.color = Color.green;
+                winText.fontSize = 100;
+                winText.alignment = TextAlignmentOptions.Center;
+            }
+            
         }
 
         if (other.CompareTag("Tree"))
