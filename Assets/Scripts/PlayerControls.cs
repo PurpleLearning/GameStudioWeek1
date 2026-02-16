@@ -59,6 +59,18 @@ public class PlayerControls : MonoBehaviour
                 Debug.Log("Maximum resuce");
             }
         }
+        
+        if (other.CompareTag("Hospital"))
+        {
+            if (currentRescueSoldiers > 0)
+            {
+                currentRescueSoldiers = 0;
+                
+                Debug.Log("There is " + currentRescueSoldiers);
+            }
+        }
     }
+
+ 
 }
 
