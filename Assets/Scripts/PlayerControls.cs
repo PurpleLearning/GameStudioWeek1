@@ -42,16 +42,16 @@ public class PlayerControls : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Soldiers"))  // Better practice than other.tag ==
+        if (other.CompareTag("Soldiers"))  
         {
-            // Check if we have room for more soldiers
+            
             if (currentRescueSoldiers < maxRescueSoldiers)
             {
-                currentRescueSoldiers++;  // Increment first
+                currentRescueSoldiers++;   
                 
                 Debug.Log(" Collected " + currentRescueSoldiers + "/" + maxRescueSoldiers);
                 
-                // Destroy the soldier
+                 
                 Destroy(other.gameObject);
             }
             else
