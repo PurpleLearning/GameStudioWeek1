@@ -21,7 +21,8 @@ public class PlayerControls : MonoBehaviour
     public TextMeshProUGUI rescuedSoliders;
     public TextMeshProUGUI winText;
     public TextMeshProUGUI maxText;
-    
+
+    public AudioSource rescueSound;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -63,6 +64,8 @@ public class PlayerControls : MonoBehaviour
     {
         if (other.CompareTag("Soldiers"))  
         {
+
+            rescueSound.Play();
             
             if (currentRescueSoldiers < maxRescueSoldiers)
             {
