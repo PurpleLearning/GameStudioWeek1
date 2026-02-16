@@ -1,9 +1,13 @@
 using System;
+using TMPro;
 using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
 {
 
+    public TextMeshProUGUI gameOverText;
+    private bool gameOver = false;
+    
     public float movementSpeed = 5f;
     private int maxRescueSoldiers = 3;
     private int currentRescueSoldiers = 0;
@@ -69,6 +73,22 @@ public class PlayerControls : MonoBehaviour
                 Debug.Log("There is " + currentRescueSoldiers);
             }
         }
+
+        if (other.CompareTag("Tree"))
+        {
+            movementSpeed = 0;
+            gameOver = true;
+    
+            if (gameOverText != null)
+            {
+                gameOverText.text = "GAME OVER";
+                gameOverText.color = Color.red;
+                gameOverText.fontSize = 100;
+                gameOverText.alignment = TextAlignmentOptions.Center;
+            }
+        }
+        
+        
     }
 
  
