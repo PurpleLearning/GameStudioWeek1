@@ -842,7 +842,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOverText: {fileID: 1494879547}
   PlayerControls: {fileID: 164070200}
-  Cameracontroller: {fileID: 0}
+  Cameracontroller: {fileID: 1585544588}
 --- !u!61 &1814353335
 BoxCollider2D:
   m_ObjectHideFlags: 0
