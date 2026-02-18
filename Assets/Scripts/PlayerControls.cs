@@ -24,6 +24,7 @@ public class PlayerControls : MonoBehaviour
     public TextMeshProUGUI gameOverText;
 
     public AudioSource rescueSound;
+    public CameraController CameraController;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -135,8 +136,8 @@ public class PlayerControls : MonoBehaviour
         if (other.CompareTag("Tree"))
         {
              
-            gameOver = true; 
-            
+            gameOver = true;
+            CameraController.cameraSpeed = 0;
             
             if (gameOverText != null)
             {
