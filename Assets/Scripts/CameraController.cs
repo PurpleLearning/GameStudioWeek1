@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    private float cameraControl = 2f;
+    private float cameraControl = 1f;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
