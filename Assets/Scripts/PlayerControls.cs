@@ -8,7 +8,7 @@ public class PlayerControls : MonoBehaviour
 
     public TextMeshProUGUI gameOverText;
      
-    
+    private bool gameOver = false;
     public float movementSpeed = 5f;
     private int maxRescueSoldiers = 3;
     private int currentRescueSoldiers = 0;
@@ -63,9 +63,12 @@ public class PlayerControls : MonoBehaviour
         }
         else
         {
+            
             movementSpeed = 5;
         }
-        
+
+        if (gameOver) movementSpeed = 0;
+
     }
 
 
@@ -130,8 +133,8 @@ public class PlayerControls : MonoBehaviour
 
         if (other.CompareTag("Tree"))
         {
-            movementSpeed = 0;
              
+            gameOver = true; 
             
             
             if (gameOverText != null)
