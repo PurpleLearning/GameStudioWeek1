@@ -5,26 +5,31 @@ public class Spawner : MonoBehaviour
 {
     public GameObject Soldiers;
     public GameObject Trees;
+    public GameObject Hospital;
+    
+    
     public float spawnOffset = 1f;
     public bool randomizeYPosition = true;
     public float minY = -5f;
     public float maxY = 5f;
     
-    // New variables for collision avoidance
-    public float checkRadius = 1.5f; // Radius to check for existing objects
-    public int maxSpawnAttempts = 10; // Maximum attempts to find empty spot
+     
+    public float checkRadius = 1.5f;  
+    public int maxSpawnAttempts = 10;  
     
-    // Separate timers for different spawn types
+    
     private float treeSpawnTimer;
     private float soldierSpawnTimer;
+    private float hospitalSpawnTimer;  
     
     // Separate intervals
-    private const float TREE_SPAWN_INTERVAL = 2f; // Trees spawn every 2 seconds
-    private float soldierSpawnInterval = 3f;
+    private const float treeTimeCounter = 2f;  
+    private float soldierTimeCounter = 3f;
+    private const float hospitalTimeCounter = 5f;  
     
     private Camera mainCamera;
     
-    // Store references to all spawned objects for checking collisions
+    
     private List<GameObject> spawnedObjects = new List<GameObject>();
     
     void Start()
@@ -38,21 +43,22 @@ public class Spawner : MonoBehaviour
         }
         
         // Initialize timers
-        treeSpawnTimer = TREE_SPAWN_INTERVAL;
+        treeSpawnTimer = treeTimeCounter;
+        hospitalSpawnTimer = hospitalTimeCounter;  
         SetRandomSoldierInterval();
     }
     
     void Update()
     {
-        // Handle tree spawning
+        
         treeSpawnTimer -= Time.deltaTime;
         if (treeSpawnTimer <= 0)
         {
             SpawnTree();
-            treeSpawnTimer = TREE_SPAWN_INTERVAL;
+            treeSpawnTimer = treeTimeCounter;
         }
         
-        // Handle soldier spawning
+         
         soldierSpawnTimer -= Time.deltaTime;
         if (soldierSpawnTimer <= 0)
         {
@@ -60,24 +66,32 @@ public class Spawner : MonoBehaviour
             SetRandomSoldierInterval();
         }
         
-        // Clean up destroyed objects from the list
+         
+        hospitalSpawnTimer -= Time.deltaTime;
+        if (hospitalSpawnTimer <= 0)
+        {
+            SpawnHospital();
+            hospitalSpawnTimer = hospitalTimeCounter;
+        }
+        
+         
         spawnedObjects.RemoveAll(item => item == null);
     }
     
     void SetRandomSoldierInterval()
     {
-        soldierSpawnInterval = Random.Range(1f, 3f);
-        soldierSpawnTimer = soldierSpawnInterval;
+        soldierTimeCounter = Random.Range(1f, 3f);
+        soldierSpawnTimer = soldierTimeCounter;
     }
     
     void SpawnTree()
     {
-        int randomTreeCount = Random.Range(1, 6); // Spawn 1-5 trees at once
+        int randomTreeCount = Random.Range(1, 6);  
         
         for (int i = 0; i < randomTreeCount; i++)
         {
             Vector3 spawnPosition = GetClearSpawnPosition();
-            if (spawnPosition != Vector3.zero) // Only spawn if we found a clear spot
+            if (spawnPosition != Vector3.zero)  
             {
                 GameObject newTree = Instantiate(Trees, spawnPosition, Quaternion.identity);
                 spawnedObjects.Add(newTree);
@@ -88,16 +102,37 @@ public class Spawner : MonoBehaviour
     void SpawnSoldier()
     {
         Vector3 spawnPosition = GetClearSpawnPosition();
-        if (spawnPosition != Vector3.zero) // Only spawn if we found a clear spot
+        if (spawnPosition != Vector3.zero)  
         {
             GameObject newSoldier = Instantiate(Soldiers, spawnPosition, Quaternion.identity);
             spawnedObjects.Add(newSoldier);
         }
     }
     
+    void SpawnHospital()
+    {
+         
+        float originalCheckRadius = checkRadius;
+        checkRadius *= 2f;  
+        
+        Vector3 spawnPosition = GetClearSpawnPosition();
+        if (spawnPosition != Vector3.zero)  
+        {
+            GameObject newHospital = Instantiate(Hospital, spawnPosition, Quaternion.identity);
+            spawnedObjects.Add(newHospital);
+            Debug.Log("Hospital spawned!");
+        }
+        else
+        {
+            Debug.LogWarning("Could not find clear spot for hospital!");
+        }
+        
+        checkRadius = originalCheckRadius;  
+    }
+    
     bool IsPositionClear(Vector3 position)
     {
-        // Check against all spawned objects
+         
         foreach (GameObject obj in spawnedObjects)
         {
             if (obj != null)
@@ -105,11 +140,11 @@ public class Spawner : MonoBehaviour
                 float distance = Vector3.Distance(position, obj.transform.position);
                 if (distance < checkRadius)
                 {
-                    return false; // Position is too close to an existing object
+                    return false;  
                 }
             }
         }
-        return true; // Position is clear
+        return true;  
     }
     
     Vector3 GetClearSpawnPosition()
@@ -118,19 +153,18 @@ public class Spawner : MonoBehaviour
         {
             Vector3 testPosition = GetSpawnPosition();
             
-            // Check if this position is clear
+             
             if (IsPositionClear(testPosition))
             {
-                return testPosition; // Found a clear spot
+                return testPosition;  
             }
         }
         
-        // If we couldn't find a clear spot after max attempts, try one more time with a different approach
-        // This is a fallback - try to spawn slightly above/below the original position
+ 
         for (int attempt = 0; attempt < maxSpawnAttempts; attempt++)
         {
             Vector3 testPosition = GetSpawnPosition();
-            // Add some vertical offset based on attempt number
+             
             float verticalOffset = (attempt % 2 == 0 ? checkRadius : -checkRadius) * (attempt / 2 + 1);
             testPosition.y += verticalOffset;
             
@@ -144,7 +178,7 @@ public class Spawner : MonoBehaviour
         }
         
         Debug.LogWarning("Could not find clear spawn position after " + maxSpawnAttempts + " attempts");
-        return GetSpawnPosition(); // Return original position as last resort
+        return GetSpawnPosition();  
     }
     
     Vector3 GetSpawnPosition()
