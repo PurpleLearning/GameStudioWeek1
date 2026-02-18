@@ -56,6 +56,15 @@ public class PlayerControls : MonoBehaviour
         {
             SceneManager.LoadScene("80'sGame");
         }
+
+        if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.LeftShift))
+        {
+            movementSpeed = 10;
+        }
+        else
+        {
+            movementSpeed = 5;
+        }
         
     }
 
