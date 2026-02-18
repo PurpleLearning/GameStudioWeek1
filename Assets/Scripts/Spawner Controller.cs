@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using System.Collections.Generic;
+using Random = UnityEngine.Random;
 
 public class Spawner : MonoBehaviour
 {
@@ -28,7 +30,7 @@ public class Spawner : MonoBehaviour
     private const float hospitalTimeCounter = 5f;  
     
     private Camera mainCamera;
-    
+     
     
     private List<GameObject> spawnedObjects = new List<GameObject>();
     
@@ -50,6 +52,9 @@ public class Spawner : MonoBehaviour
     
     void Update()
     {
+        
+ 
+        
         
         treeSpawnTimer -= Time.deltaTime;
         if (treeSpawnTimer <= 0)
@@ -77,7 +82,10 @@ public class Spawner : MonoBehaviour
          
         spawnedObjects.RemoveAll(item => item == null);
     }
-    
+
+
+ 
+
     void SetRandomSoldierInterval()
     {
         soldierTimeCounter = Random.Range(1f, 3f);
