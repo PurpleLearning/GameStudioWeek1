@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 public class PlayerControls : MonoBehaviour
 {
 
-    public TextMeshProUGUI gameOverText;
+   
      
-    private bool gameOver = false;
+    public bool gameOver = false;
     public float movementSpeed = 5f;
     private int maxRescueSoldiers = 3;
     private int currentRescueSoldiers = 0;
@@ -21,6 +21,7 @@ public class PlayerControls : MonoBehaviour
     public TextMeshProUGUI rescuedSoliders;
     public TextMeshProUGUI winText;
     public TextMeshProUGUI maxText;
+    public TextMeshProUGUI gameOverText;
 
     public AudioSource rescueSound;
     // Start is called once before the first execution of Update after the MonoBehaviour is created

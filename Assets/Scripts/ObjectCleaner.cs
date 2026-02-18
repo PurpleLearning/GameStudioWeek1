@@ -1,7 +1,17 @@
 using UnityEngine;
-
+using TMPro;
 public class ObjectCleaner : MonoBehaviour
+
 {
+
+    private int cleanerMover = 2;
+    
+    private int soldierCount = 0;
+    public TextMeshProUGUI gameOverText;
+    public PlayerControls PlayerControls;
+    public CameraController Cameracontroller;
+ 
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -11,18 +21,41 @@ public class ObjectCleaner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector2.right * 2 * Time.deltaTime);
+        transform.Translate(Vector2.right * cleanerMover * Time.deltaTime);
+
+        if (soldierCount == 3)
+        {
+            gameOverText.text = "GAME OVER";
+            gameOverText.color = Color.red;
+            gameOverText.fontSize = 100;
+            gameOverText.alignment = TextAlignmentOptions.Center;
+            
+            PlayerControls.gameOver = true;
+            Cameracontroller.cameraSpeed = 0;
+            cleanerMover = 0;
+ 
+            
+        }
+        
+        
     }
     
     
     
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Tree") || other.CompareTag("Soldiers") || other.CompareTag("Hospital"))   
+        if (other.CompareTag("Tree") || other.CompareTag("Hospital"))   
         {
             Destroy(other.gameObject);
             Debug.Log("DIEEE");
         }
+
+        if (other.CompareTag("Soldiers"))
+        {
+            Destroy(other.gameObject);
+            soldierCount++;
+        }
+        
     }
     
     

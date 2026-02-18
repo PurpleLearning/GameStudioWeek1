@@ -25,12 +25,13 @@ public class Spawner : MonoBehaviour
     private float hospitalSpawnTimer;  
     
     // Separate intervals
-    private const float treeTimeCounter = 2f;  
+    public const float treeTimeCounter = 2f;  
     private float soldierTimeCounter = 3f;
     private const float hospitalTimeCounter = 5f;  
-    
     private Camera mainCamera;
      
+    public PlayerControls PlayerControls;
+    
     
     private List<GameObject> spawnedObjects = new List<GameObject>();
     
@@ -52,7 +53,11 @@ public class Spawner : MonoBehaviour
     
     void Update()
     {
-        
+        if (PlayerControls.gameOver)
+        {
+            this.enabled = false;
+            return;
+        }
  
         
         
