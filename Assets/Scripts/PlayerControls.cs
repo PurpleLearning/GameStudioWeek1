@@ -25,6 +25,9 @@ public class PlayerControls : MonoBehaviour
 
     public AudioSource rescueSound;
     public CameraController CameraController;
+
+    public String CurrentScene;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -96,7 +99,7 @@ public class PlayerControls : MonoBehaviour
             }
             else
             {
-                
+                maxText.gameObject.SetActive(true);
                 maxText.text = "MAX SOLIDER CAPACITY!!!";
                 maxText.color = Color.red;
                 maxText.fontSize = 36;
@@ -137,7 +140,12 @@ public class PlayerControls : MonoBehaviour
         {
              
             gameOver = true;
-            CameraController.cameraSpeed = 0;
+
+            if (CurrentScene != "80'sGame")
+            {
+                CameraController.cameraSpeed = 0;
+            }
+            
             
             if (gameOverText != null)
             {
