@@ -27,11 +27,13 @@ public class PlayerControls : MonoBehaviour
     public CameraController CameraController;
 
     public String CurrentScene;
+    private SpriteRenderer spriteRenderer;
+    
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
     
     
@@ -51,10 +53,12 @@ public class PlayerControls : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             transform.Translate(Vector2.left * movementSpeed * Time.deltaTime);
+            spriteRenderer.flipX = false;
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
             transform.Translate(Vector2.right * movementSpeed * Time.deltaTime);
+            spriteRenderer.flipX = true;
         }
 
         if (Input.GetKey(KeyCode.R))
