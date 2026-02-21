@@ -210,7 +210,7 @@ public class PlayerControls : MonoBehaviour
                 maxText.gameObject.SetActive(true);
                 maxText.text = "MAX SOLIDER CAPACITY!!!";
                 maxText.color = Color.red;
-                maxText.fontSize = 36;
+                maxText.fontSize = 40;
             }
         }
         
@@ -257,6 +257,7 @@ public class PlayerControls : MonoBehaviour
 
     void GameOver()
     {
+        maxText.gameObject.SetActive(false);
         gameOverText.text = "GAME OVER! Press R to restart ";
         gameOverText.color = Color.red;
         gameOverText.fontSize = 100;

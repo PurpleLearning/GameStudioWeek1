@@ -2218,6 +2218,22 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6186710284654765117, guid: cb9bff69cde085a45b1bc68dad02ce29, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 571.5996
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186710284654765117, guid: cb9bff69cde085a45b1bc68dad02ce29, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -917.5237
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186710284654765117, guid: cb9bff69cde085a45b1bc68dad02ce29, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 18.6285
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186710284654765117, guid: cb9bff69cde085a45b1bc68dad02ce29, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -458.757
+      objectReference: {fileID: 0}
     - target: {fileID: 7448101819991368329, guid: cb9bff69cde085a45b1bc68dad02ce29, type: 3}
       propertyPath: m_fontSize
       value: 40
