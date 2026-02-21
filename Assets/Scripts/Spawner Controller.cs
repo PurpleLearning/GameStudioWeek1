@@ -22,7 +22,7 @@ public class Spawner : MonoBehaviour
     
     // Separate intervals
     public const float treeTimeCounter = 2f;  
-    private float soldierTimeCounter = 2f;
+    private float soldierTimeCounter = 1f;
     private const float hospitalTimeCounter = 5f;  
     private Camera mainCamera;
      
@@ -86,7 +86,7 @@ public class Spawner : MonoBehaviour
     
     void SpawnTree()
     {
-        int randomTreeCount = Random.Range(1, 6);  
+        int randomTreeCount = Random.Range(2, 5);  
         
         for (int i = 0; i < randomTreeCount; i++)
         {
