@@ -4,7 +4,7 @@ public class ObjectCleaner : MonoBehaviour
 
 {
 
-    private int cleanerMover = 2;
+    private int cleanerMover = 3;
     
     private int soldierCount = 0;
     public TextMeshProUGUI gameOverText;

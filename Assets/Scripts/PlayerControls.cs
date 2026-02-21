@@ -2,6 +2,8 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
+
 
 public class PlayerControls : MonoBehaviour
 {
@@ -24,6 +26,7 @@ public class PlayerControls : MonoBehaviour
     public TextMeshProUGUI gameOverText;
 
     public AudioSource rescueSound;
+    public AudioSource screamingMan;
     public CameraController CameraController;
 
     public String CurrentScene;
@@ -86,7 +89,20 @@ public class PlayerControls : MonoBehaviour
         if (other.CompareTag("Soldiers"))  
         {
 
-            rescueSound.Play();
+            int audioRandomiser = Random.Range(1, 5);
+
+            if (audioRandomiser == 1)
+            {
+                screamingMan.Play();
+            }
+            else 
+            {
+                rescueSound.Play();
+            }
+            
+            
+            
+           
             
             if (currentRescueSoldiers < maxRescueSoldiers)
             {
