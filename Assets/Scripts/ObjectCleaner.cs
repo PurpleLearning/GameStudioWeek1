@@ -4,7 +4,7 @@ public class ObjectCleaner : MonoBehaviour
 
 {
 
-    private int cleanerMover = 2;
+    private int cleanerMover = 3;
     
     private int soldierCount = 0;
     public TextMeshProUGUI gameOverText;
@@ -25,15 +25,13 @@ public class ObjectCleaner : MonoBehaviour
 
         if (soldierCount == 3)
         {
-            gameOverText.text = "GAME OVER";
-            gameOverText.color = Color.red;
-            gameOverText.fontSize = 100;
-            gameOverText.alignment = TextAlignmentOptions.Center;
+
             
             PlayerControls.gameOver = true;
             Cameracontroller.cameraSpeed = 0;
             cleanerMover = 0;
- 
+    
+            
             
         }
         
