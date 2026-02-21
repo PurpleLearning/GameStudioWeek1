@@ -152,9 +152,17 @@ public class PlayerControls : MonoBehaviour
         {
  
                 SceneManager.LoadScene(CurrentScene);
-     
+            
             
         }
+        
+        if (gameOver == true)
+        {
+            GameOver();
+            helicopterRigidBody.bodyType = RigidbodyType2D.Static;
+        }    
+        
+        
     }
     
     void OnTriggerEnter2D(Collider2D other)
@@ -214,12 +222,14 @@ public class PlayerControls : MonoBehaviour
                 winText.color = Color.green;
                 winText.fontSize = 100;
                 winText.alignment = TextAlignmentOptions.Center;
+                helicopterRigidBody.bodyType = RigidbodyType2D.Static;
             }
         }
         
         if (other.CompareTag("Tree"))
         {
             gameOver = true;
+            helicopterRigidBody.bodyType = RigidbodyType2D.Static;
             
             if (CurrentScene != "80'sGame")
             {
@@ -228,11 +238,19 @@ public class PlayerControls : MonoBehaviour
             
             if (gameOverText != null)
             {
-                gameOverText.text = "GAME OVER";
-                gameOverText.color = Color.red;
-                gameOverText.fontSize = 100;
-                gameOverText.alignment = TextAlignmentOptions.Center;
+                GameOver();
             }
         }
     }
+
+    void GameOver()
+    {
+        gameOverText.text = "GAME OVER";
+        gameOverText.color = Color.red;
+        gameOverText.fontSize = 100;
+        gameOverText.alignment = TextAlignmentOptions.Center;
+    }
+    
+    
+    
 }
