@@ -150,7 +150,10 @@ public class PlayerControls : MonoBehaviour
         // Handle UI and input that doesn't affect physics
         if (Input.GetKey(KeyCode.R))
         {
-            SceneManager.LoadScene("80'sGame");
+ 
+                SceneManager.LoadScene(CurrentScene);
+     
+            
         }
     }
     

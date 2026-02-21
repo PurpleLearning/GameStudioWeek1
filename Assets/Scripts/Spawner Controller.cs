@@ -21,8 +21,8 @@ public class Spawner : MonoBehaviour
     private float hospitalSpawnTimer;  
     
     // Separate intervals
-    public const float treeTimeCounter = 2f;  
-    private float soldierTimeCounter = 1f;
+    public const float treeTimeCounter = 3f;  
+    private float soldierTimeCounter = 2.5f;
     private const float hospitalTimeCounter = 5f;  
     private Camera mainCamera;
      
