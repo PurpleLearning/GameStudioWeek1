@@ -2,7 +2,9 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI; 
 using Random = UnityEngine.Random;
+
 
 public class PlayerControls : MonoBehaviour
 {
@@ -30,6 +32,9 @@ public class PlayerControls : MonoBehaviour
     public TextMeshProUGUI maxText;
     public TextMeshProUGUI gameOverText;
     
+
+    public Button returnButton;
+    
     public AudioSource rescueSound;
     public AudioSource screamingMan;
     public CameraController CameraController;
@@ -43,6 +48,12 @@ public class PlayerControls : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         helicopterRigidBody = GetComponent<Rigidbody2D>();
+
+        if (returnButton != null)
+        {
+            returnButton.gameObject.SetActive(false);
+        }
+        
         
        
         if (helicopterRigidBody == null)
@@ -77,13 +88,13 @@ public class PlayerControls : MonoBehaviour
          
         Vector2 inputDirection = Vector2.zero;
         
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W) )
             inputDirection.y += 1;
-        if (Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
             inputDirection.y -= 1;
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
             inputDirection.x -= 1;
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.RightArrow)  || Input.GetKey(KeyCode.D))
             inputDirection.x += 1;
         
         
@@ -169,8 +180,8 @@ public class PlayerControls : MonoBehaviour
     {
         if (other.CompareTag("Soldiers"))  
         {
-           
             
+            maxText.gameObject.SetActive(false);
             if (currentRescueSoldiers < maxRescueSoldiers)
             {
                 currentRescueSoldiers++;   
@@ -217,12 +228,13 @@ public class PlayerControls : MonoBehaviour
             
             if (totalrescueSoldiers == requiredRescueSoldiersToWin)
             {
-                gameOver = true;
+                
                 winText.text = "You Win";
                 winText.color = Color.green;
                 winText.fontSize = 100;
                 winText.alignment = TextAlignmentOptions.Center;
                 helicopterRigidBody.bodyType = RigidbodyType2D.Static;
+                returnButton.gameObject.SetActive(true);
             }
         }
         
@@ -245,7 +257,7 @@ public class PlayerControls : MonoBehaviour
 
     void GameOver()
     {
-        gameOverText.text = "GAME OVER";
+        gameOverText.text = "GAME OVER! Press R to restart ";
         gameOverText.color = Color.red;
         gameOverText.fontSize = 100;
         gameOverText.alignment = TextAlignmentOptions.Center;

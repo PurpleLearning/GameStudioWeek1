@@ -25,15 +25,13 @@ public class ObjectCleaner : MonoBehaviour
 
         if (soldierCount == 3)
         {
-            gameOverText.text = "GAME OVER";
-            gameOverText.color = Color.red;
-            gameOverText.fontSize = 100;
-            gameOverText.alignment = TextAlignmentOptions.Center;
+
             
             PlayerControls.gameOver = true;
             Cameracontroller.cameraSpeed = 0;
             cleanerMover = 0;
- 
+    
+            
             
         }
         
