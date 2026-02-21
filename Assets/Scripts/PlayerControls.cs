@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 public class PlayerControls : MonoBehaviour
 {
 
-    public TextMeshProUGUI gameOverText;
-    private bool gameOver = false;
-    
+   
+     
+    public bool gameOver = false;
     public float movementSpeed = 5f;
     private int maxRescueSoldiers = 3;
     private int currentRescueSoldiers = 0;
@@ -21,8 +21,13 @@ public class PlayerControls : MonoBehaviour
     public TextMeshProUGUI rescuedSoliders;
     public TextMeshProUGUI winText;
     public TextMeshProUGUI maxText;
+    public TextMeshProUGUI gameOverText;
 
     public AudioSource rescueSound;
+    public CameraController CameraController;
+
+    public String CurrentScene;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -56,7 +61,19 @@ public class PlayerControls : MonoBehaviour
         {
             SceneManager.LoadScene("80'sGame");
         }
-        
+
+        if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.LeftShift))
+        {
+            movementSpeed = 10;
+        }
+        else
+        {
+            
+            movementSpeed = 5;
+        }
+
+        if (gameOver) movementSpeed = 0;
+
     }
 
 
@@ -82,7 +99,7 @@ public class PlayerControls : MonoBehaviour
             }
             else
             {
-                
+                maxText.gameObject.SetActive(true);
                 maxText.text = "MAX SOLIDER CAPACITY!!!";
                 maxText.color = Color.red;
                 maxText.fontSize = 36;
@@ -121,8 +138,13 @@ public class PlayerControls : MonoBehaviour
 
         if (other.CompareTag("Tree"))
         {
-            movementSpeed = 0;
+             
             gameOver = true;
+
+            if (CurrentScene != "80'sGame")
+            {
+                CameraController.cameraSpeed = 0;
+            }
             
             
             if (gameOverText != null)
